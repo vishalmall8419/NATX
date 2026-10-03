@@ -1,4 +1,5 @@
-﻿@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
 
 @theme {
   --font-inter: "Inter", sans-serif;
@@ -7,115 +8,92 @@
   --font-syne: "Syne", sans-serif;
 }
 
-/* ==========================================================================
-   SUPERCHARGED THEME VARIABLES 
-   ========================================================================== */
-
 :root, html.dark {
-  /* Core Backgrounds */
   --bg-primary: #000000;
-  --bg-secondary: #050505;
-  --bg-panel: #0a0a0a;
-  --bg-card: rgba(20, 20, 25, 0.4);
+  --bg-secondary: #0a0a0a;
+  --bg-card: rgba(15, 15, 20, 0.6);
+  --bg-panel: rgba(20, 20, 25, 0.7);
   
-  /* Glowing / Borders */
-  --border-light: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(0, 229, 255, 0.3);
-  --nav-border: rgba(255, 255, 255, 0.05);
-
-  /* Primary Accent - Neon Cyan & Deep Purple */
-  --primary: #00e5ff;
-  --primary-light: #7000ff;
-  --grad-cyan-start: #00e5ff;
-  --grad-cyan-end: #7000ff;
-  --grad-cyan-focus: #00e5ff;
-
-  /* Typography */
+  --primary: #00ff66;
+  --grad-cyan-start: #00ff66;
+  --grad-cyan-end: #00993d;
+  
   --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --text-gray-300: #d4d4d8;
-  --text-gray-400: #9ca3af;
-  --text-gray-500: #6b7280;
+  --text-secondary: #e2e8f0;
+  --text-gray-400: #94a3b8;
+  --text-gray-500: #64748b;
   
-  /* Buttons */
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.15);
+  
   --button-text: #000000;
-  --bg-social-hover: rgba(255, 255, 255, 0.1);
 }
 
 html.light {
-  /* Core Backgrounds */
   --bg-primary: #f8fafc;
   --bg-secondary: #ffffff;
-  --bg-panel: #ffffff;
   --bg-card: rgba(255, 255, 255, 0.8);
-
-  /* Glowing / Borders */
-  --border-light: rgba(0, 0, 0, 0.1);
-  --border-glow: rgba(0, 0, 0, 0.05);
-  --nav-border: rgba(0, 0, 0, 0.05);
-
-  /* Primary Accent */
-  --primary: #2563eb;
-  --primary-light: #7c3aed;
-  --grad-cyan-start: #2563eb;
-  --grad-cyan-end: #7c3aed;
-  --grad-cyan-focus: #2563eb;
-
-  /* Typography */
+  --bg-panel: rgba(248, 250, 252, 0.9);
+  
+  --primary: #00cc52;
+  --grad-cyan-start: #00cc52;
+  --grad-cyan-end: #006629;
+  
   --text-primary: #0f172a;
   --text-secondary: #334155;
-  --text-gray-300: #475569;
-  --text-gray-400: #64748b;
-  --text-gray-500: #94a3b8;
+  --text-gray-400: #475569;
+  --text-gray-500: #64748b;
   
-  /* Buttons */
+  --border-light: rgba(0, 0, 0, 0.1);
+  --border: rgba(0, 0, 0, 0.15);
+  
   --button-text: #ffffff;
-  --bg-social-hover: rgba(0, 0, 0, 0.05);
 }
-
-/* ==========================================================================
-   GLOBAL RESET & FONTS
-   ========================================================================== */
 
 body {
-  font-family: var(--font-inter);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.5s ease, color 0.5s ease;
-  overflow-x: hidden;
+  font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 10px;
+  cursor: none;
+  /* removed overflow-x for lenis */
+  /* removed max-width for lenis */
 }
 
 /* ==========================================================================
-   DHAMAKEDAR UTILITIES
+   SCROLLBAR (Optimized)
    ========================================================================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--grad-cyan-start), var(--grad-cyan-end)); border-radius: 10px; }
 
-.hero-glow-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(140px);
-  z-index: 0;
-  pointer-events: none;
-  animation: pulse-glow 8s infinite alternate ease-in-out;
+/* ==========================================================================
+   LAYOUT UTILITIES
+   ========================================================================== */
+.section-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 640px) { .section-container { padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 1024px) { .section-container { padding-left: 2.5rem; padding-right: 2.5rem; } }
+
+.section-padding { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+@media (min-width: 768px) { .section-padding { padding-top: 5rem; padding-bottom: 5rem; } }
+@media (min-width: 1024px) { .section-padding { padding-top: 6rem; padding-bottom: 6rem; } }
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
 }
 
-@keyframes pulse-glow {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.15; }
-  50% { transform: scale(1.2) translate(50px, -50px); opacity: 0.25; }
-  100% { transform: scale(0.9) translate(-50px, 20px); opacity: 0.1; }
-}
-
+/* ==========================================================================
+   GRADIENT & GLOW UTILITIES
+   ========================================================================== */
 .text-gradient {
   background: linear-gradient(135deg, var(--grad-cyan-start), var(--grad-cyan-end));
   -webkit-background-clip: text;
@@ -124,86 +102,135 @@ body {
   display: inline-block;
 }
 
-/* Glassmorphism Classes */
+.hero-glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  /* removed expensive blur, using radial gradients instead */
+  z-index: 0;
+  pointer-events: none;
+  animation: pulse-glow 10s infinite alternate ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%   { transform: scale(1) translate(0, 0); opacity: 0.12; }
+  50%  { transform: scale(1.15) translate(40px, -40px); opacity: 0.2; }
+  100% { transform: scale(0.92) translate(-40px, 15px); opacity: 0.08; }
+}
+
+/* ==========================================================================
+   GLASSMORPHISM (Optimized Blur)
+   ========================================================================== */
 .glass-panel {
   background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border-light);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-.glass-pill {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 50px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Custom Selection */
-::selection {
-  background: var(--primary);
-  color: var(--button-text);
+/* ==========================================================================
+   BADGE / PILL
+   ========================================================================== */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 255, 102, 0.2);
+  background: rgba(0, 255, 102, 0.07);
+  padding: 0.35rem 1rem;
+  font-family: var(--font-space);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  backdrop-filter: blur(8px);
+}
+html.light .badge-pill {
+  border-color: rgba(37, 99, 235, 0.2);
+  background: rgba(37, 99, 235, 0.07);
+  color: var(--primary);
 }
 
-/* Interactive Cursor Target Fixes */
-.interactable { cursor: pointer; }
-.ft-line, .feat-line, .gov-progress-line { position: relative; }
-.ft-line::after, .feat-line::after { content: ''; position: absolute; top: -25px; bottom: -25px; left: 0; right: 0; z-index: 10; cursor: crosshair; }
-.gov-progress-line::after { content: ''; position: absolute; left: -25px; right: -25px; top: 0; bottom: 0; z-index: 10; cursor: crosshair; }
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+.text-3d {
+  text-shadow:
+    0 1px 0px rgba(255,255,255,0.1),
+    0 3px 10px rgba(0,229,255,0.2),
+    0 6px 15px rgba(0,0,0,0.5);
+}
+.heading-xl {
+  font-family: var(--font-syne);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+.body-text {
+  font-family: var(--font-space);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-gray-400);
+}
 
-
-/* Meteor Animation */
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
 @keyframes meteor {
-  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-  70% { opacity: 1; }
+  0%   { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70%  { opacity: 1; }
   100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
 }
+.animate-meteor { animation: meteor 5s linear infinite; }
 
-.animate-meteor {
-  animation: meteor 5s linear infinite;
-}
-
-
-/* Physics Tilt Glare Effect */
+/* ==========================================================================
+   PHYSICS TILT GLARE (Optimized layers)
+   ========================================================================== */
 .physics-tilt {
   transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.physics-tilt:hover {
   will-change: transform;
 }
-
 .physics-tilt::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   border-radius: inherit;
   background: radial-gradient(
-    800px circle at var(--glare-x, 50%) var(--glare-y, 50%), 
-    rgba(255,255,255,0.06),
-    transparent 40%
+    600px circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255,255,255,0.05),
+    transparent 45%
   );
-  z-index: 10;
+  z-index: 1;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.4s ease;
 }
+.physics-tilt:hover::before { opacity: 1; }
+.physics-tilt > * { position: relative; z-index: 2; }
 
-.physics-tilt:hover::before {
-  opacity: 1;
+/* ==========================================================================
+   CURSOR SELECTION & FIXES
+   ========================================================================== */
+::selection { background: rgba(0, 255, 102, 0.3); color: #fff; }
+.interactable { cursor: none; }
+a, button, input { cursor: pointer; }
+img { max-width: 100%; height: auto; }
+/* removed scroll-behavior: smooth to fix Lenis jitter */
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-
-
-/* Clean 3D Text */
-.text-3d {
-  text-shadow: 0px 1px 1px rgba(255,255,255,0.15), 0px 4px 15px rgba(0,229,255,0.3), 0px 8px 20px rgba(0,0,0,0.8);
-}
-
-
-
-/* Base typography refinements for Figma-level precision */
-h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.02em;
-}
-p {
-  letter-spacing: 0.01em;
-}
-
-

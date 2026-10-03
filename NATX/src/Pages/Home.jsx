@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../Components/Navbar";
 import ParticlesBackground from "../Components/ParticlesBackground";
+import CanvasMeteors from "../Components/CanvasMeteors";
 import Hero from "../Components/LandingPage/Hero";
 import FeaturesSection from "../Components/LandingPage/FeaturesSection";
 import BuyAndSell from "../Components/LandingPage/Buy&Sell";
@@ -47,6 +48,7 @@ const Home = () => {
   return (
     <div className="relative overflow-x-hidden">
       <ParticlesBackground />
+      <CanvasMeteors />
       <Navbar />
       <Hero />
       <FeaturesSection />

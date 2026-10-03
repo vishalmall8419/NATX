@@ -37,9 +37,9 @@ const Tokenomics = () => {
   }, { scope: section });
 
   return (
-    <section ref={section} className="relative w-full overflow-hidden bg-[var(--bg-primary)] px-4 sm:px-6 py-12 md:py-20">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[800px] max-h-[800px] rounded-full bg-[var(--primary)] opacity-[0.03] blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] rounded-full bg-[var(--grad-cyan-end)] opacity-[0.04] blur-[120px] pointer-events-none" />
+    <section ref={section} className="relative w-full overflow-hidden bg-transparent px-4 sm:px-6 py-12 md:py-20">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[800px] max-h-[800px] rounded-full ![background:radial-gradient(circle_at_center,rgba(0,255,102,0.03)_0%,transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] rounded-full ![background:radial-gradient(circle_at_center,rgba(0,153,61,0.04)_0%,transparent_60%)] pointer-events-none" />
       <div className="relative z-10 mx-auto w-full max-w-[1280px]">
         <div className="tok-header mb-10 sm:mb-16 text-center flex flex-col items-center">
           <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-[var(--primary)]/30 bg-[var(--primary)]/10 px-4 py-2 backdrop-blur-sm">
@@ -56,7 +56,7 @@ const Tokenomics = () => {
         </div>
         <div className="tok-grid grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {tokenData.map(({ title, value, Icon, grad }) => (
-            <div key={title} className={"tok-card glass-panel physics-tilt group relative overflow-hidden rounded-[20px] sm:rounded-[28px] p-5 sm:p-7 transition-all duration-500 hover:-translate-y-2 hover:border-[var(--primary)] hover:shadow-[0_20px_40px_rgba(0,229,255,0.1)]"}>
+            <div key={title} className={"tok-card glass-panel physics-tilt group relative overflow-hidden rounded-[20px] sm:rounded-[28px] p-5 sm:p-7 transition-all duration-500 hover:-translate-y-2 hover:border-[var(--primary)] hover:shadow-[0_20px_40px_rgba(0,255,102,0.1)]"}>
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className={"mb-5 sm:mb-6 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-[16px] bg-gradient-to-br text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 " + grad}>
                 <Icon size={24} strokeWidth={2} />

@@ -1,126 +1,73 @@
-﻿import React, { useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Img3 from "../../assets/img3.png";
+import Img4 from "../../assets/img4.png";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const CheckIcon = () => (
-  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-gradient-to-br from-[var(--grad-cyan-start)] to-[var(--grad-cyan-end)] text-white shadow-[0_0_15px_rgba(188,0,255,0.3)]">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-  </div>
-);
-
-const listItems = [
-  {
-    title: "AI-Powered Predictive Analytics",
-    description: "Deep data analysis utilizing machine learning to predict market volatility and algorithmic momentum in real-time.",
-  },
-  {
-    title: "Zero-Latency Liquidity Routing",
-    description: "Proprietary routing mechanism ensures trades are executed at lightspeed across decentralized liquidity pools.",
-  },
-  {
-    title: "Quantum-Resistant Architecture",
-    description: "Built on next-generation lattice-based cryptography to secure assets against future computational threats.",
-  },
-];
 
 const Future = () => {
   const section = useRef();
 
   useGSAP(() => {
-    ScrollTrigger.create({
-      trigger: section.current,
-      start: "top 75%",
-      onEnter: () => gsap.fromTo(".ft-left", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: "expo.out" })
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: section.current, start: "top 75%" }
     });
 
-    ScrollTrigger.create({
-      trigger: section.current,
-      start: "top 70%",
-      onEnter: () => gsap.fromTo(".ft-item", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "expo.out" })
-    });
+    tl.fromTo(".fut-text", { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out" })
+      .fromTo(".fut-img", { scale: 0.9, opacity: 0, rotationY: 15 }, { scale: 1, opacity: 1, rotationY: 0, duration: 1.2, stagger: 0.2, ease: "expo.out" }, "-=0.8");
 
-    ScrollTrigger.create({
-      trigger: section.current,
-      start: "top 75%",
-      onEnter: () => gsap.fromTo(".ft-right", { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 1.2, ease: "expo.out" })
-    });
+    gsap.to(".fut-img-1", { y: -15, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    gsap.to(".fut-img-2", { y: 15, duration: 5, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 1 });
 
-    gsap.to(".ft-img", {
-      y: -30,
-      rotationZ: 3,
-      ease: "none",
-      scrollTrigger: { trigger: section.current, start: "top bottom", end: "bottom top", scrub: 1 },
-    });
   }, { scope: section });
 
   return (
-    <section ref={section} className="relative w-full overflow-hidden bg-[var(--bg-primary)] px-6 py-8 md:py-12">
+    <section ref={section} className="relative w-full overflow-hidden bg-transparent section-padding">
+      <div className="section-divider absolute top-0" />
       
-      {/* Background Decor */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[30%] h-[50%] bg-[var(--primary)] opacity-[0.03] blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 right-[-10%] w-[40%] h-[60%] bg-[var(--grad-cyan-end)] opacity-[0.05] blur-[180px] pointer-events-none" />
+      <div className="absolute right-0 top-1/3 w-[60vw] h-[60vw] rounded-full ![background:radial-gradient(circle_at_center,rgba(0,153,61,0.03)_0%,transparent_60%)] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col items-center gap-10 lg:flex-row lg:gap-12">
-
-        {/* LEFT: Text list */}
-        <div className="ft-left w-full lg:w-[50%]">
-          
-          <div className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-[var(--primary)]/30 bg-[var(--primary)]/10 px-4 py-1.5">
-            <span className="h-2 w-2 rounded-full bg-[var(--primary)] animate-pulse" />
-            <span className="font-space text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--primary)]">
-              Protocol Evolution
-            </span>
+      <div className="section-container relative z-10 flex flex-col items-center gap-16 lg:flex-row lg:gap-10">
+        
+        <div className="w-full lg:w-1/2 lg:pr-10">
+          <div className="fut-text badge-pill mb-6">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)] animate-pulse" />
+            Ecosystem Vision
           </div>
-
-          <h2 className="font-syne mb-4 text-[32px] font-black leading-[1.05] tracking-tight text-[var(--text-primary)] sm:text-[42px] lg:text-[48px] text-3d">
-            THE FUTURE OF <br /> <span className="text-gradient">WEB3 TRADING</span>
+          <h2 className="fut-text heading-xl text-3d mb-6 text-[32px] sm:text-[42px] lg:text-[48px]">
+            Shaping the Future of <span className="text-gradient">Web3 Finance</span>
           </h2>
-          
-          <p className="font-space text-[14px] leading-[1.6] text-[var(--text-gray-400)] mb-6 max-w-[95%]">
-            Every layer of the NATX protocol is engineered to redefine the financial matrix. We are moving beyond simple ledgers into fully autonomous, intelligent networks capable of self-healing and predictive load-balancing.
+          <p className="fut-text body-text mb-8">
+            NATX is not just a blockchain; it's a foundation for the next generation of decentralized applications. By merging high throughput with uncompromised security, we are paving the way for institutional adoption.
           </p>
-
-          <div className="flex flex-col gap-4">
-            {listItems.map((item, i) => (
-              <React.Fragment key={i}>
-                <div className="ft-item glass-panel physics-tilt group flex items-start gap-4 rounded-[20px] p-5 transition-all duration-300 hover:border-[var(--primary)] hover:shadow-[0_10px_30px_rgba(188,0,255,0.15)]">
-                  <CheckIcon />
-                  <div>
-                    <h3 className="font-syne mb-1 text-[18px] font-bold tracking-tight text-[var(--text-primary)]">
-                      {item.title}
-                    </h3>
-                    <p className="font-space text-[13px] leading-[1.6] text-[var(--text-gray-400)]">
-                      {item.description}
-                    </p>
-                  </div>
+          
+          <div className="flex flex-col gap-5">
+            {[
+              { title: "Institutional DeFi", desc: "Compliant, high-liquidity dark pools and lending protocols." },
+              { title: "Tokenized RWAs", desc: "Bringing real-world assets on-chain with verifiable proof of reserves." }
+            ].map((item, i) => (
+              <div key={i} className="fut-text flex items-start gap-4 rounded-2xl border border-[var(--border-light)] bg-[var(--bg-card)] p-5 transition-colors hover:border-[var(--primary)]/50">
+                <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary)] shadow-[0_0_10px_rgba(0,255,102,0.8)]" />
+                <div>
+                  <h4 className="font-syne text-[18px] font-bold text-[var(--text-primary)] mb-1">{item.title}</h4>
+                  <p className="font-space text-[14px] text-[var(--text-gray-400)] leading-relaxed">{item.desc}</p>
                 </div>
-              </React.Fragment>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT: Image */}
-        <div className="ft-right relative flex w-full justify-center lg:w-[50%] mt-8 lg:mt-0">
-          
-          <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--primary)]/10 blur-[100px] pointer-events-none" />
-          
-          <div className="relative z-10 w-full max-w-[400px] physics-tilt">
-            <div className="absolute inset-0 rounded-full border-2 border-dashed border-[var(--primary)]/30 animate-[spin_30s_linear_infinite]" />
-            <div className="absolute inset-4 rounded-full border border-[var(--grad-cyan-end)]/20 animate-[spin_20s_linear_infinite_reverse]" />
-            
-            <img
-              src={Img3}
-              alt="Future of Crypto"
-              className="ft-img relative z-20 w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(188,0,255,0.4)]"
-            />
+        <div className="w-full lg:w-1/2 relative min-h-[400px] sm:min-h-[500px]">
+          <div className="fut-img fut-img-1 absolute top-0 right-0 w-[65%] sm:w-[60%] rounded-3xl overflow-hidden glass-panel physics-tilt z-10 border-[rgba(255,255,255,0.1)] p-2">
+            <img src={Img3} alt="Future Tech 1" loading="lazy" decoding="async" className="w-full h-auto rounded-2xl object-cover" />
+          </div>
+          <div className="fut-img fut-img-2 absolute bottom-0 left-0 w-[55%] sm:w-[50%] rounded-3xl overflow-hidden glass-panel physics-tilt z-20 border-[rgba(255,255,255,0.1)] p-2 shadow-2xl">
+            <img src={Img4} alt="Future Tech 2" loading="lazy" decoding="async" className="w-full h-auto rounded-2xl object-cover" />
           </div>
         </div>
+
       </div>
     </section>
   );

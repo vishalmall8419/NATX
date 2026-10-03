@@ -88,17 +88,17 @@ const CustomCursor = () => {
   }, [cursorX, cursorY]);
 
   let scale = 1;
-  let bg = "rgba(0, 229, 255, 0)";
+  let bg = "rgba(0, 255, 102, 0)";
   let border = "1px solid var(--primary)";
   let mixBlend = "screen";
 
   if (isHovering) {
     scale = 1.3;
-    bg = "rgba(0, 229, 255, 0.1)";
+    bg = "rgba(0, 255, 102, 0.1)";
     border = "1.5px solid var(--primary)";
   } else if (isTextHovering) {
     scale = 1.8;
-    bg = "rgba(112, 0, 255, 0.05)";
+    bg = "rgba(0, 255, 102, 0.05)";
     border = "1px dashed var(--primary)";
   }
 

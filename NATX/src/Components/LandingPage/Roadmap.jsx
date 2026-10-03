@@ -28,7 +28,7 @@ const Roadmap = () => {
   }, { scope: section });
 
   return (
-    <section ref={section} className="relative w-full overflow-hidden bg-[var(--bg-primary)] px-4 sm:px-6 py-12 md:py-20">
+    <section ref={section} className="relative w-full overflow-hidden bg-transparent px-4 sm:px-6 py-12 md:py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--primary)]/[0.02] to-transparent pointer-events-none" />
       <div className="relative z-10 mx-auto w-full max-w-[1280px]">
         <div className="rd-head mb-10 sm:mb-16">

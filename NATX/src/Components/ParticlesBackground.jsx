@@ -33,8 +33,8 @@ const ParticlesBackground = () => {
     window.addEventListener("mousemove", onMouseMove);
 
     // Physics constants
-    const PARTICLE_COUNT = 150;
-    const CONNECT_DISTANCE = 120;
+    const PARTICLE_COUNT = 50; // OPTIMIZED: reduced for performance
+    const CONNECT_DISTANCE = 180; // OPTIMIZED: increased distance
     const MOUSE_REPULSE_RADIUS = 200;
     const RESTORE_FORCE = 0.005;
     const DAMPING = 0.9;
@@ -49,7 +49,7 @@ const ParticlesBackground = () => {
         this.vx = 0;
         this.vy = 0;
         this.radius = Math.random() * 1.5 + 0.5;
-        this.color = Math.random() > 0.5 ? "0, 229, 255" : "112, 0, 255";
+        this.color = Math.random() > 0.5 ? "0, 255, 102" : "255, 255, 255";
       }
 
       update() {
@@ -109,7 +109,7 @@ const ParticlesBackground = () => {
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             // Mix colors or just use cyan
-            ctx.strokeStyle = "rgba(0, 229, 255, " + (alpha * 0.3) + ")";
+            ctx.strokeStyle = "rgba(0, 255, 102, " + (alpha * 0.3) + ")";
             ctx.stroke();
           }
         }
@@ -135,7 +135,7 @@ const ParticlesBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 mix-blend-screen opacity-50"
+      className="pointer-events-none fixed inset-0 z-0  opacity-50"
     />
   );
 };

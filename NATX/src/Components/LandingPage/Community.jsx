@@ -36,15 +36,15 @@ const Community = () => {
   }, { scope: section });
 
   return (
-    <section ref={section} className="relative w-full overflow-hidden bg-[var(--bg-primary)] px-4 sm:px-6 py-16 md:py-24">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[900px] rounded-full bg-[var(--primary)] opacity-[0.03] blur-[200px] pointer-events-none" />
+    <section ref={section} className="relative w-full overflow-hidden bg-transparent px-4 sm:px-6 py-16 md:py-24">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-[900px] rounded-full ![background:radial-gradient(circle_at_center,rgba(0,255,102,0.03)_0%,transparent_60%)] pointer-events-none" />
       <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, rgba(112,0,255,0.05) 0%, transparent 70%)" }} />
 
       <div className="relative z-10 mx-auto w-full max-w-[860px] text-center">
 
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {stats.map((s) => (
-            <div key={s.label} className="comm-stat glass-panel physics-tilt rounded-2xl px-6 py-4 min-w-[120px] transition-all duration-300 hover:border-[var(--primary)] hover:shadow-[0_10px_30px_rgba(0,229,255,0.1)]">
+            <div key={s.label} className="comm-stat glass-panel physics-tilt rounded-2xl px-6 py-4 min-w-[120px] transition-all duration-300 hover:border-[var(--primary)] hover:shadow-[0_10px_30px_rgba(0,255,102,0.1)]">
               <p className="font-syne text-[26px] sm:text-[32px] font-black text-gradient leading-none">{s.value}</p>
               <p className="font-space text-[11px] text-[var(--text-gray-400)] uppercase tracking-wider font-bold mt-1">{s.label}</p>
             </div>
@@ -65,12 +65,12 @@ const Community = () => {
         </p>
 
         <div className="comm-text flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <button className="interactable flex h-12 items-center gap-2.5 rounded-full bg-gradient-to-r from-[var(--grad-cyan-start)] to-[var(--grad-cyan-end)] px-7 font-space text-[14px] font-bold uppercase tracking-wider text-white transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(0,229,255,0.4)]">
+          <button className="interactable flex h-12 items-center gap-2.5 rounded-full bg-gradient-to-r from-[var(--grad-cyan-start)] to-[var(--grad-cyan-end)] px-7 font-space text-[14px] font-bold uppercase tracking-wider text-white transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(0,255,102,0.4)]">
             Enter Discord <DiscordIcon />
           </button>
           <div className="flex gap-3">
             {[MessageCircle, Send, Globe].map((Icon, i) => (
-              <a key={i} href="#" className="interactable flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border-light)] bg-[var(--bg-panel)] text-[var(--text-gray-400)] transition-all hover:border-[var(--primary)] hover:text-[var(--primary)] hover:scale-110 hover:shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+              <a key={i} href="#" className="interactable flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border-light)] bg-[var(--bg-panel)] text-[var(--text-gray-400)] transition-all hover:border-[var(--primary)] hover:text-[var(--primary)] hover:scale-110 hover:shadow-[0_0_15px_rgba(0,255,102,0.2)]">
                 <Icon size={18} />
               </a>
             ))}

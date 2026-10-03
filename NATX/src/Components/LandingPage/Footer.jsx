@@ -1,138 +1,97 @@
-﻿import React, { useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Send, ArrowUpRight } from "lucide-react";
+import Logo from "../Logo";
 
 gsap.registerPlugin(ScrollTrigger);
-import { ArrowUpRight, Send } from "lucide-react";
 
-/* ================= BRAND ICONS ================= */
 const TwitterIcon = ({ size = 18 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
 
-const DiscordIcon = ({ size = 18 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1828 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
-  </svg>
-);
-
-const RedditIcon = ({ size = 18 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65 0 3-1.35 3-3s-1.35-3-3-3c-1.38 0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65 0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66 0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 11.5c0-.95.78-1.72 1.7-1.72.6 0 1.15.3 1.45.83-1.04.68-1.8 1.53-2.1 2.5-.66-.3-1.05-1-1.05-1.6zm17.65 7c-3.1 1.96-8.6 1.96-11.7 0-1.4-.9-2.25-2.3-2.25-3.8 0-1.5.85-2.9 2.25-3.8 3.1-1.96 8.6-1.96 11.7 0 1.4.9 2.25 2.3 2.25 3.8 0 1.5-.85 2.9-2.25 3.8zm-1.85-6.5c0-.95.78-1.72 1.7-1.72.95 0 1.7.78 1.7 1.72 0 .6-.4 1.3-1.05 1.6-.3-.98-1.05-1.83-2.1-2.5-.25-.53.8-.83 1.45-.83H18.1zM8 12.8c-.85 0-1.5.68-1.5 1.5s.65 1.5 1.5 1.5 1.5-.68 1.5-1.5-.65-1.5-1.5-1.5zm8 0c-.85 0-1.5.68-1.5 1.5s.65 1.5 1.5 1.5 1.5-.68 1.5-1.5-.65-1.5-1.5-1.5zm-4 4.5c-1.8 0-3.3-.9-3.7-2.1-.1-.2.1-.5.3-.5.2 0 .4.1.4.3.3.9 1.5 1.5 3 1.5s2.7-.6 3-1.5c0-.2.3-.3.4-.3.3 0 .4.3.3.5-.4 1.2-1.9 2.1-3.7 2.1z" />
+const GithubIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
   </svg>
 );
 
 const Footer = () => {
   const container = useRef();
+
   useGSAP(() => {
-    gsap.from(".ftr-left", {
-      x: -50, opacity: 0, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: container.current, start: "top 90%", toggleActions: "play none none reverse" }
-    });
-    gsap.from(".ftr-right", {
-      x: 50, opacity: 0, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: container.current, start: "top 90%", toggleActions: "play none none reverse" }
-    });
-    gsap.from(".ftr-bottom", {
-      y: 20, opacity: 0, duration: 0.8, ease: "power3.out",
-      scrollTrigger: { trigger: ".ftr-bottom", start: "top 95%", toggleActions: "play none none reverse" }
-    });
+    gsap.fromTo(".ftr-elem", 
+      { y: 30, opacity: 0 }, 
+      { y: 0, opacity: 1, stagger: 0.1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: container.current, start: "top 85%" } }
+    );
   }, { scope: container });
 
   return (
-    <footer ref={container} className="relative w-full overflow-hidden bg-transparent px-6 pb-6 pt-24 font-inter sm:px-12 lg:px-20">
-      
-      {/* Background Gradient Bottom */}
-      <div className="pointer-events-none absolute bottom-0 left-1/2 h-[350px] w-full max-w-[1500px] -translate-x-1/2 opt-glow opacity-40 lg:h-[500px]" />
+    <footer ref={container} className="relative w-full overflow-hidden bg-transparent section-padding pb-8">
+      <div className="section-divider absolute top-0" />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 w-[80vw] h-[30vw] max-w-[1200px] -translate-x-1/2 rounded-[100%] ![background:radial-gradient(circle_at_center,rgba(0,255,102,0.03)_0%,transparent_60%)]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1200px]">
+      <div className="section-container relative z-10">
         
-        {/* =================================================
-            TOP SECTION (Newsletter & Links)
-        ================================================= */}
-        <div className="flex flex-col items-start justify-between gap-16 md:flex-row md:gap-10">
+        <div className="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-20 mb-16">
           
-          {/* Newsletter Box */}
-          <div className="ftr-left w-full max-w-[500px] rounded-[24px] bg-[var(--bg-footer-box)] px-8 py-10 shadow-lg md:px-10 md:py-12">
-            <h3 className="font-outfit mb-8 text-[18px] font-bold tracking-wide text-[var(--text-primary)] md:text-[20px]">
-              Sign Up to Receive Product Updates and More
-            </h3>
-            <div className="relative flex items-center border-b border-[var(--primary)] pb-2 transition-colors duration-300 focus-within:border-[var(--grad-cyan-focus)]">
-              <input
-                type="email"
-                placeholder="youremail@gmail.com"
-                className="w-full bg-transparent pr-10 text-[14px] text-[var(--text-primary)] outline-none placeholder:text-[var(--text-gray-500)]"
-              />
-              <button
-                type="button"
-                aria-label="Submit"
-                className="absolute right-0 bottom-2 text-[var(--primary)] transition-colors duration-300 hover:text-[var(--text-primary)]"
-              >
-                <ArrowUpRight size={22} strokeWidth={2} />
-              </button>
-            </div>
-          </div>
-
-          {/* Links Section */}
-          <div className="ftr-right flex w-full gap-16 md:w-auto md:gap-24 lg:pr-10">
-            {/* Menu Links */}
-            <div className="flex flex-col gap-5">
-              <h4 className="font-outfit mb-2 text-[16px] font-bold tracking-wider uppercase text-[var(--text-primary)]">Menu</h4>
-              <a href="#" className="text-[14px] font-medium text-[var(--text-gray-400)] transition-colors duration-300 hover:text-[var(--primary)]">
-                Home
+          <div className="ftr-elem w-full lg:w-[35%] flex flex-col items-start">
+            <Logo />
+            <p className="body-text mt-6 mb-8 max-w-[400px]">
+              The next-generation Web3 protocol built for infinite scalability, quantum resistance, and institutional adoption. Join the future of decentralized finance today.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-light)] bg-[var(--bg-card)] text-[var(--text-gray-400)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]">
+                <TwitterIcon size={18} />
               </a>
-              <a href="#" className="text-[14px] font-medium text-[var(--text-gray-400)] transition-colors duration-300 hover:text-[var(--primary)]">
-                About Us
+              <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-light)] bg-[var(--bg-card)] text-[var(--text-gray-400)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]">
+                <Send size={18} />
               </a>
-              <a href="#" className="text-[14px] font-medium text-[var(--text-gray-400)] transition-colors duration-300 hover:text-[var(--primary)]">
-                Services
-              </a>
-            </div>
-
-            {/* Help Links */}
-            <div className="flex flex-col gap-5">
-              <h4 className="font-outfit mb-2 text-[16px] font-bold tracking-wider uppercase text-[var(--text-primary)]">Help</h4>
-              <a href="#" className="text-[14px] font-medium text-[var(--text-gray-400)] transition-colors duration-300 hover:text-[var(--primary)]">
-                Privacy and Policy
-              </a>
-              <a href="#" className="text-[14px] font-medium text-[var(--text-gray-400)] transition-colors duration-300 hover:text-[var(--primary)]">
-                Term of Use
+              <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-light)] bg-[var(--bg-card)] text-[var(--text-gray-400)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]">
+                <GithubIcon size={18} />
               </a>
             </div>
           </div>
+
+          <div className="ftr-elem w-full lg:w-[25%] flex justify-start lg:justify-center">
+            <div className="flex flex-col gap-4">
+              <h4 className="font-space font-bold uppercase tracking-widest text-[var(--text-primary)] mb-2">Ecosystem</h4>
+              {["Developer Docs", "Block Explorer", "Governance Forum", "Node Setup Guide", "Whitepaper"].map(link => (
+                <a key={link} href="#" className="font-space text-[14px] text-[var(--text-gray-400)] transition-colors hover:text-[var(--primary)]">{link}</a>
+              ))}
+            </div>
+          </div>
+
+          <div className="ftr-elem w-full lg:w-[40%]">
+            <div className="glass-panel rounded-3xl p-8 border border-[var(--border-light)] bg-[var(--bg-card)]/50">
+              <h4 className="font-syne text-[20px] font-bold text-[var(--text-primary)] mb-2">Stay Updated</h4>
+              <p className="body-text text-[13px] mb-6">Join our newsletter to receive the latest protocol updates, ecosystem grants, and developer resources.</p>
+              <div className="flex relative items-center">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full rounded-full border border-[var(--border-light)] bg-transparent py-3.5 pl-5 pr-14 font-space text-[14px] text-[var(--text-primary)] outline-none transition-colors focus:border-[var(--primary)]"
+                />
+                <button className="absolute right-2 flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-[var(--grad-cyan-start)] to-[var(--grad-cyan-end)] text-black transition-transform hover:scale-105">
+                  <ArrowUpRight size={18} />
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        {/* =================================================
-            BOTTOM SECTION (Copyright & Socials)
-        ================================================= */}
-        <div className="ftr-bottom mt-20 flex flex-col items-center justify-between gap-6 md:flex-row md:gap-0">
-          
-          <div className="text-[13px] font-medium text-[var(--text-gray-400)]">
-            2023. All Rights Reserved
-          </div>
+        <div className="ftr-elem section-divider mb-6" />
 
-          <div className="text-[13px] font-medium text-[var(--text-gray-400)]">
-            Terms & Conditions Privacy
+        <div className="ftr-elem flex flex-col items-center justify-between gap-4 sm:flex-row text-[12px] font-space font-medium text-[var(--text-gray-500)]">
+          <p>© 2024 NATX Protocol. All rights reserved.</p>
+          <div className="flex gap-6">
+            <a href="#" className="transition-colors hover:text-[var(--primary)]">Privacy Policy</a>
+            <a href="#" className="transition-colors hover:text-[var(--primary)]">Terms of Service</a>
           </div>
-
-          <div className="flex items-center gap-5 text-[var(--text-primary)]">
-            <a href="#" aria-label="Telegram" className="transition-colors hover:text-[var(--primary)]">
-              <Send size={18} />
-            </a>
-            <a href="#" aria-label="Discord" className="transition-colors hover:text-[var(--primary)]">
-              <DiscordIcon size={19} />
-            </a>
-            <a href="#" aria-label="Twitter" className="transition-colors hover:text-[var(--primary)]">
-              <TwitterIcon size={18} />
-            </a>
-            <a href="#" aria-label="Reddit" className="transition-colors hover:text-[var(--primary)]">
-              <RedditIcon size={20} />
-            </a>
-          </div>
-          
         </div>
       </div>
     </footer>
@@ -140,17 +99,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

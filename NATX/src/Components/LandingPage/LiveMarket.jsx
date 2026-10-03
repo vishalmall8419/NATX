@@ -31,7 +31,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const StatPill = ({ value, label }) => (
-  <div className="glass-panel physics-tilt rounded-2xl px-5 py-4 flex flex-col items-start transition-all duration-300 hover:border-[var(--primary)] hover:shadow-[0_10px_30px_rgba(0,229,255,0.1)]">
+  <div className="glass-panel physics-tilt rounded-2xl px-5 py-4 flex flex-col items-start transition-all duration-300 hover:border-[var(--primary)] hover:shadow-[0_10px_30px_rgba(0,255,102,0.1)]">
     <div className="flex items-center gap-2 mb-1">
       <ArrowUp size={14} className="text-green-400" />
       <span className="font-syne text-[22px] sm:text-[28px] font-black text-[var(--text-primary)]">{value}</span>
@@ -62,8 +62,8 @@ const LiveMarket = () => {
   }, { scope: section });
 
   return (
-    <section ref={section} className="relative w-full overflow-hidden bg-[var(--bg-primary)] px-4 sm:px-6 py-12 md:py-20">
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40vw] h-[40vw] rounded-full bg-[var(--primary)] opacity-[0.04] blur-[150px] pointer-events-none" />
+    <section ref={section} className="relative w-full overflow-hidden bg-transparent px-4 sm:px-6 py-12 md:py-20">
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[40vw] h-[40vw] rounded-full ![background:radial-gradient(circle_at_center,rgba(0,255,102,0.04)_0%,transparent_60%)] pointer-events-none" />
       <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
 
         <div className="w-full lg:w-[42%]">

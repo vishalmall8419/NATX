@@ -1,4 +1,4 @@
-﻿import React, { useRef, useEffect, useState, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Globe from "react-globe.gl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -23,7 +23,6 @@ const GlobalReach = () => {
   const [countries, setCountries] = useState({ features: [] });
   const [globeSize, setGlobeSize] = useState(480);
 
-  // ResizeObserver â€” no window.addEventListener
   useEffect(() => {
     if (!wrapperRef.current) return;
     const ro = new ResizeObserver(([entry]) => {
@@ -34,115 +33,102 @@ const GlobalReach = () => {
     return () => ro.disconnect();
   }, []);
 
-  // Fetch country polygons
   useEffect(() => {
     fetch("https://raw.githubusercontent.com/vasturiano/react-globe.gl/master/example/datasets/ne_110m_admin_0_countries.geojson")
       .then((r) => r.json())
       .then(setCountries);
   }, []);
 
-  // Auto-rotate
   useEffect(() => {
     if (!globeRef.current) return;
     const ctrl = globeRef.current.controls();
     ctrl.autoRotate = true;
     ctrl.autoRotateSpeed = 0.45;
     ctrl.enableZoom = false;
-  });
+  }, []);
 
   useGSAP(() => {
-    gsap.fromTo(".gr-left", { x: -35, opacity: 0 }, { x: 0, opacity: 1, duration: 1.1, ease: "power3.out",
-      scrollTrigger: { trigger: section.current, start: "top 78%" },
-    });
-    gsap.fromTo(".gr-right", { x: 35, opacity: 0 }, { x: 0, opacity: 1, duration: 1.1, ease: "power3.out",
-      scrollTrigger: { trigger: section.current, start: "top 78%" },
-    });
+    gsap.fromTo(".gr-text", 
+      { y: 40, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out", scrollTrigger: { trigger: section.current, start: "top 75%" } }
+    );
+    gsap.fromTo(".gr-globe",
+      { scale: 0.8, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.5, ease: "power3.out", scrollTrigger: { trigger: section.current, start: "top 70%" } }
+    );
   }, { scope: section });
 
   return (
-    <section
-      ref={section}
-      className="relative w-full overflow-hidden bg-transparent px-5 py-20 sm:px-8 md:py-28 lg:px-16"
-    >
-      <div className="mx-auto flex w-full max-w-[1160px] flex-col items-center gap-12 md:flex-row md:gap-10">
+    <section ref={section} className="relative w-full overflow-hidden bg-transparent section-padding">
+      <div className="section-divider absolute top-0" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] rounded-full ![background:radial-gradient(circle_at_center,rgba(0,255,102,0.02)_0%,transparent_60%)] pointer-events-none" />
 
-        {/* â”€â”€ LEFT: Text â”€â”€ */}
-        <div className="gr-left w-full md:w-[46%] lg:pr-6">
-          {/* Badge */}
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border-light)] bg-[var(--text-primary)]/[0.04] px-4 py-1.5">
-            <Globe2 size={13} className="text-[var(--primary)]" />
-            <span className="font-inter text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--primary)]">
-              Global Reach
-            </span>
+      <div className="section-container flex flex-col items-center gap-12 lg:flex-row lg:gap-16">
+        
+        <div className="w-full lg:w-1/2 text-center lg:text-left flex flex-col items-center lg:items-start">
+          <div className="gr-text badge-pill mb-6">
+            <Globe2 size={12} />
+            Worldwide Network
           </div>
-
-          <h2 className="font-outfit mb-6 text-[32px] font-black leading-[1.1] tracking-tight text-[var(--text-primary)] sm:text-[38px] lg:text-[46px]">
-            Borderless<br />Crypto Trading
+          <h2 className="gr-text heading-xl text-3d mb-6 text-[32px] sm:text-[42px] lg:text-[52px]">
+            Decentralized <br className="hidden sm:block" /> Across the <span className="text-gradient">Globe</span>
           </h2>
-
-          <p className="font-inter mb-9 max-w-[440px] text-[16px] leading-[1.85] text-[var(--text-gray-400)]">
-            Connect with creators, collectors, and traders worldwide. The NATX protocol provides deep liquidity and seamless cross-border transactions without restrictions.
+          <p className="gr-text body-text mb-8 max-w-[500px]">
+            NATX nodes are distributed globally, ensuring censorship resistance, robust fault tolerance, and localized sub-second latency for users everywhere.
           </p>
-
-          {/* Stats / bullet list */}
-          <div className="flex flex-col gap-5 border-l-[2px] border-[var(--primary)] pl-6 opacity-90">
-            <div>
-              <h4 className="font-outfit text-[16px] font-semibold text-[var(--text-primary)]">Universal Accessibility</h4>
-              <p className="font-inter mt-1 text-[14px] text-[var(--text-gray-500)]">
-                Trade instantly across 100+ countries with minimal latency.
-              </p>
+          
+          <div className="gr-text grid grid-cols-2 gap-6 w-full max-w-[400px]">
+            <div className="glass-panel rounded-2xl p-4 text-left border border-[var(--border-light)]">
+              <span className="block font-syne text-[28px] font-black text-gradient">180+</span>
+              <span className="font-space text-[12px] font-bold uppercase tracking-wider text-[var(--text-gray-500)]">Countries</span>
             </div>
-            <div>
-              <h4 className="font-outfit text-[16px] font-semibold text-[var(--text-primary)]">Unified Liquidity</h4>
-              <p className="font-inter mt-1 text-[14px] text-[var(--text-gray-500)]">
-                Access order books aggregated from global markets.
-              </p>
+            <div className="glass-panel rounded-2xl p-4 text-left border border-[var(--border-light)]">
+              <span className="block font-syne text-[28px] font-black text-gradient">24k+</span>
+              <span className="font-space text-[12px] font-bold uppercase tracking-wider text-[var(--text-gray-500)]">Active Nodes</span>
             </div>
           </div>
         </div>
 
-        {/* â”€â”€ RIGHT: Globe â”€â”€ */}
-        <div className="gr-right flex w-full justify-center md:w-[54%]">
-          <div
-            ref={wrapperRef}
-            className="relative aspect-square w-full max-w-[560px] md:translate-x-6"
-          >
-            {typeof window !== "undefined" && globeSize > 0 && (
-              <Globe
-                ref={globeRef}
-                width={globeSize}
-                height={globeSize}
-                backgroundColor="rgba(0,0,0,0)"
-                showAtmosphere
-                atmosphereColor="rgba(0,214,163,0.2)"
-                atmosphereAltitude={0.15}
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
-                polygonsData={countries.features}
-                polygonAltitude={0.01}
-                polygonCapColor={() => "#0a0a0a"}
-                polygonSideColor={() => "rgba(0,0,0,0)"}
-                polygonStrokeColor={() => "#1c1c1c"}
-                htmlElementsData={MARKERS}
-                htmlElement={() => {
-                  const el = document.createElement("div");
-                  el.style.cssText = `
-                    width:8px;height:8px;border-radius:50%;
-                    background:var(--primary);
-                    box-shadow:0 0 12px 3px var(--primary);
-                    transform:translate(-50%,-50%);
-                  `;
-                  return el;
-                }}
-              />
+        <div className="gr-globe w-full lg:w-1/2 flex justify-center">
+          <div ref={wrapperRef} className="relative w-full max-w-[480px] aspect-square lg:max-w-[540px] rounded-full flex items-center justify-center">
+            
+            <div className="absolute inset-0 rounded-full border border-[var(--primary)]/20 animate-[spin_20s_linear_infinite] border-dashed" />
+            <div className="absolute inset-4 rounded-full border border-blue-500/10 animate-[spin_15s_linear_infinite_reverse]" />
+            <div className="absolute inset-0 rounded-full bg-[var(--primary)] opacity-[0.05] blur-3xl pointer-events-none" />
+
+            {countries.features.length > 0 && (
+              <div className="relative z-10 cursor-grab active:cursor-grabbing">
+                <Globe
+                  ref={globeRef}
+                  width={globeSize}
+                  height={globeSize}
+                  backgroundColor="rgba(0,0,0,0)"
+                  showAtmosphere={true}
+                  atmosphereColor="#00e5ff"
+                  atmosphereAltitude={0.15}
+                  polygonsData={countries.features}
+                  polygonAltitude={0.01}
+                  polygonResolution={1}
+                  polygonCapColor={() => "rgba(0, 229, 255, 0.15)"}
+                  polygonSideColor={() => "rgba(0, 0, 0, 0.4)"}
+                  polygonStrokeColor={() => "rgba(0, 229, 255, 0.4)"}
+                  labelsData={MARKERS}
+                  labelLat={(d) => d.lat}
+                  labelLng={(d) => d.lng}
+                  labelText={(d) => d.name}
+                  labelSize={2}
+                  labelDotRadius={0.5}
+                  labelColor={() => "#fff"}
+                  labelResolution={2}
+                />
+              </div>
             )}
           </div>
         </div>
+
       </div>
     </section>
   );
 };
 
 export default GlobalReach;
-
-
-
