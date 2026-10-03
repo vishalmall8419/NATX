@@ -132,7 +132,7 @@ const Hero = () => {
             </p>
 
             {/* CTAs */}
-            <div className="hero-btns mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:justify-start">
+            <div className="hero-btns mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:justify-start">
               <button
                 ref={btnPrimaryRef}
                 {...magnet(btnPrimaryRef)}
