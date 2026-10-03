@@ -1,0 +1,209 @@
+﻿@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+  --font-syne: "Syne", sans-serif;
+}
+
+/* ==========================================================================
+   SUPERCHARGED THEME VARIABLES 
+   ========================================================================== */
+
+:root, html.dark {
+  /* Core Backgrounds */
+  --bg-primary: #000000;
+  --bg-secondary: #050505;
+  --bg-panel: #0a0a0a;
+  --bg-card: rgba(20, 20, 25, 0.4);
+  
+  /* Glowing / Borders */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 229, 255, 0.3);
+  --nav-border: rgba(255, 255, 255, 0.05);
+
+  /* Primary Accent - Neon Cyan & Deep Purple */
+  --primary: #00e5ff;
+  --primary-light: #7000ff;
+  --grad-cyan-start: #00e5ff;
+  --grad-cyan-end: #7000ff;
+  --grad-cyan-focus: #00e5ff;
+
+  /* Typography */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-gray-300: #d4d4d8;
+  --text-gray-400: #9ca3af;
+  --text-gray-500: #6b7280;
+  
+  /* Buttons */
+  --button-text: #000000;
+  --bg-social-hover: rgba(255, 255, 255, 0.1);
+}
+
+html.light {
+  /* Core Backgrounds */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-panel: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.8);
+
+  /* Glowing / Borders */
+  --border-light: rgba(0, 0, 0, 0.1);
+  --border-glow: rgba(0, 0, 0, 0.05);
+  --nav-border: rgba(0, 0, 0, 0.05);
+
+  /* Primary Accent */
+  --primary: #2563eb;
+  --primary-light: #7c3aed;
+  --grad-cyan-start: #2563eb;
+  --grad-cyan-end: #7c3aed;
+  --grad-cyan-focus: #2563eb;
+
+  /* Typography */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-gray-300: #475569;
+  --text-gray-400: #64748b;
+  --text-gray-500: #94a3b8;
+  
+  /* Buttons */
+  --button-text: #ffffff;
+  --bg-social-hover: rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   GLOBAL RESET & FONTS
+   ========================================================================== */
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   DHAMAKEDAR UTILITIES
+   ========================================================================== */
+
+.hero-glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: 0;
+  pointer-events: none;
+  animation: pulse-glow 8s infinite alternate ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.15; }
+  50% { transform: scale(1.2) translate(50px, -50px); opacity: 0.25; }
+  100% { transform: scale(0.9) translate(-50px, 20px); opacity: 0.1; }
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--grad-cyan-start), var(--grad-cyan-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+.glass-pill {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+}
+
+/* Custom Selection */
+::selection {
+  background: var(--primary);
+  color: var(--button-text);
+}
+
+/* Interactive Cursor Target Fixes */
+.interactable { cursor: pointer; }
+.ft-line, .feat-line, .gov-progress-line { position: relative; }
+.ft-line::after, .feat-line::after { content: ''; position: absolute; top: -25px; bottom: -25px; left: 0; right: 0; z-index: 10; cursor: crosshair; }
+.gov-progress-line::after { content: ''; position: absolute; left: -25px; right: -25px; top: 0; bottom: 0; z-index: 10; cursor: crosshair; }
+
+
+/* Meteor Animation */
+@keyframes meteor {
+  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
+}
+
+.animate-meteor {
+  animation: meteor 5s linear infinite;
+}
+
+
+/* Physics Tilt Glare Effect */
+.physics-tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.physics-tilt::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    800px circle at var(--glare-x, 50%) var(--glare-y, 50%), 
+    rgba(255,255,255,0.06),
+    transparent 40%
+  );
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.physics-tilt:hover::before {
+  opacity: 1;
+}
+
+
+/* Clean 3D Text */
+.text-3d {
+  text-shadow: 0px 1px 1px rgba(255,255,255,0.15), 0px 4px 15px rgba(0,229,255,0.3), 0px 8px 20px rgba(0,0,0,0.8);
+}
+
+
+
+/* Base typography refinements for Figma-level precision */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+}
+p {
+  letter-spacing: 0.01em;
+}
+
+
