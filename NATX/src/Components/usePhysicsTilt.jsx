@@ -1,13 +1,40 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
 
 const usePhysicsTilt = () => {
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    let activeCard = null;
+
+    const resetCard = (card) => {
+      gsap.to(card, {
+        rotateX: 0,
+        rotateY: 0,
+        scale: 1,
+        duration: 1.2,
+        ease: "elastic.out(1, 0.4)",
+        overwrite: "auto"
+      });
+    };
+
+    const handleMouseOver = (e) => {
       const card = e.target.closest('.physics-tilt');
-      if (!card) return;
+      if (card !== activeCard) {
+        if (activeCard) resetCard(activeCard);
+        activeCard = card;
+      }
+    };
+
+    const handleMouseOut = (e) => {
+      if (!activeCard) return;
+      if (e.relatedTarget && activeCard.contains(e.relatedTarget)) return;
+      resetCard(activeCard);
+      activeCard = null;
+    };
+
+    const handleMouseMove = (e) => {
+      if (!activeCard) return;
       
-      const rect = card.getBoundingClientRect();
+      const rect = activeCard.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       
@@ -21,10 +48,10 @@ const usePhysicsTilt = () => {
       const glareX = (x / rect.width) * 100;
       const glareY = (y / rect.height) * 100;
       
-      card.style.setProperty('--glare-x', glareX + '%');
-      card.style.setProperty('--glare-y', glareY + '%');
+      activeCard.style.setProperty('--glare-x', glareX + '%');
+      activeCard.style.setProperty('--glare-y', glareY + '%');
 
-      gsap.to(card, {
+      gsap.to(activeCard, {
         rotateX,
         rotateY,
         scale: 1.02,
@@ -36,32 +63,17 @@ const usePhysicsTilt = () => {
       });
     };
 
-    const handleMouseLeave = (e) => {
-      const card = e.target.closest('.physics-tilt');
-      if (!card) return;
-      
-      // Prevent jitter: if moving to a child of the same card, ignore!
-      if (e.relatedTarget && card.contains(e.relatedTarget)) return;
-
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "elastic.out(1, 0.4)",
-        overwrite: "auto"
-      });
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseout", handleMouseLeave);
+    // Use passive true for all global mouse listeners to prevent scroll blocking
+    document.addEventListener("mouseover", handleMouseOver, { passive: true });
+    document.addEventListener("mouseout", handleMouseOut, { passive: true });
+    document.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseout", handleMouseLeave);
     };
   }, []);
 };
 
 export default usePhysicsTilt;
-

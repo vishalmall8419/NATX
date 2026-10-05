@@ -47,15 +47,15 @@ const Navbar = () => {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       setScrolled(currentScrollY > 10);
-      
+
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      
+
       lastScrollY = currentScrollY;
     };
 
@@ -64,9 +64,9 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Ecosystem", path: "/ecosystem" },
-    { name: "Nodes", path: "/nodes" },
-    { name: "Governance", path: "/governance" },
+    { name: "Ecosystem", path: "/dashboard" },
+    { name: "Nodes", path: "/node-guide" },
+    { name: "Governance", path: "/dashboard/governance" },
     { name: "Docs", path: "/docs" },
   ];
 
@@ -82,7 +82,11 @@ const Navbar = () => {
         }`}
       >
         <div className="section-container flex items-center justify-between">
-          <Link to="/" onClick={() => setIsOpen(false)} className="interactable">
+          <Link
+            to="/"
+            onClick={() => setIsOpen(false)}
+            className="interactable"
+          >
             <Logo />
           </Link>
 
@@ -104,7 +108,11 @@ const Navbar = () => {
           {/* Actions */}
           <div className="hidden items-center gap-4 md:flex">
             <ThemeToggle />
-            <Button path="/app" text="Launch App" icon={<ArrowUpRight size={15} />} />
+            <Button
+              path="/login"
+              text="Launch App"
+              icon={<ArrowUpRight size={15} />}
+            />
           </div>
 
           {/* Mobile Toggle */}
@@ -112,9 +120,15 @@ const Navbar = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="interactable flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full border border-[var(--border-light)] bg-[var(--bg-panel)] md:hidden transition-colors hover:border-[var(--primary)]"
           >
-            <span className={`h-[2px] w-5 bg-[var(--text-primary)] transition-all duration-300 ${isOpen ? "translate-y-[7px] rotate-45" : ""}`} />
-            <span className={`h-[2px] w-5 bg-[var(--text-primary)] transition-all duration-300 ${isOpen ? "opacity-0" : ""}`} />
-            <span className={`h-[2px] w-5 bg-[var(--text-primary)] transition-all duration-300 ${isOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+            <span
+              className={`h-[2px] w-5 bg-[var(--text-primary)] transition-all duration-300 ${isOpen ? "translate-y-[7px] rotate-45" : ""}`}
+            />
+            <span
+              className={`h-[2px] w-5 bg-[var(--text-primary)] transition-all duration-300 ${isOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`h-[2px] w-5 bg-[var(--text-primary)] transition-all duration-300 ${isOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
+            />
           </button>
         </div>
       </nav>
@@ -122,7 +136,9 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 z-[90] bg-[var(--bg-primary)]/95 backdrop-blur-2xl transition-all duration-500 md:hidden ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex h-full flex-col justify-center px-8 py-24">
@@ -143,7 +159,7 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          <div 
+          <div
             className="mt-12 flex flex-col items-center gap-6"
             style={{
               transform: isOpen ? "translateY(0)" : "translateY(20px)",
@@ -152,7 +168,11 @@ const Navbar = () => {
             }}
           >
             <ThemeToggle />
-            <Button path="/app" text="Launch App" icon={<ArrowUpRight size={15} />} />
+            <Button
+              path="/login"
+              text="Launch App"
+              icon={<ArrowUpRight size={15} />}
+            />
           </div>
         </div>
       </div>

@@ -1,109 +1,62 @@
-﻿import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 const CustomCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [isTextHovering, setIsTextHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  
-  const hoverRef = useRef(false);
-  const textHoverRef = useRef(false);
-  const visibleRef = useRef(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
-  const springX = useSpring(cursorX, { stiffness: 200, damping: 25 });
-  const springY = useSpring(cursorY, { stiffness: 200, damping: 25 });
+  const springX = useSpring(cursorX, { stiffness: 400, damping: 25 });
+  const springY = useSpring(cursorY, { stiffness: 400, damping: 25 });
 
   useEffect(() => {
     document.body.style.cursor = "none";
 
-    let magneticEl = null;
-
     const moveCursor = (e) => {
-      const target = e.target;
-      
-      const interactable = target.closest("a, button, input, .interactable");
-      if (interactable) {
-        if (!hoverRef.current) {
-          hoverRef.current = true;
-          setIsHovering(true);
-        }
-        magneticEl = interactable;
-        
-        const rect = magneticEl.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        cursorX.set(e.clientX * 0.8 + centerX * 0.2); 
-        cursorY.set(e.clientY * 0.8 + centerY * 0.2);
-      } else {
-        if (hoverRef.current) {
-          hoverRef.current = false;
-          setIsHovering(false);
-        }
-        magneticEl = null;
-        cursorX.set(e.clientX);
-        cursorY.set(e.clientY);
-      }
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
+    };
 
-      const textEl = target.closest("h1, h2, h3, p, span.text-gradient, .text-3d");
-      if (textEl && !interactable) {
-        if (!textHoverRef.current) {
-          textHoverRef.current = true;
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      if (target && target.closest) {
+        if (target.closest("a, button, input, .interactable")) {
+          setIsHovering(true);
+          setIsTextHovering(false);
+        } else if (target.closest("h1, h2, h3, p, span.text-gradient, .text-3d")) {
           setIsTextHovering(true);
-        }
-      } else {
-        if (textHoverRef.current) {
-          textHoverRef.current = false;
+          setIsHovering(false);
+        } else {
+          setIsHovering(false);
           setIsTextHovering(false);
         }
       }
-      
-      if (!visibleRef.current) {
-        visibleRef.current = true;
-        setIsVisible(true);
-      }
     };
 
-    const handleMouseLeave = () => {
-      visibleRef.current = false;
-      setIsVisible(false);
-    };
-    const handleMouseEnter = () => {
-      visibleRef.current = true;
-      setIsVisible(true);
-    };
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", moveCursor);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    document.addEventListener("mouseover", handleMouseOver, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+    document.addEventListener("mouseenter", handleMouseEnter, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+      document.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.body.style.cursor = "auto";
     };
-  }, [cursorX, cursorY]);
-
-  let scale = 1;
-  let bg = "rgba(0, 255, 102, 0)";
-  let border = "1px solid var(--primary)";
-  let mixBlend = "screen";
-
-  if (isHovering) {
-    scale = 1.3;
-    bg = "rgba(0, 255, 102, 0.1)";
-    border = "1.5px solid var(--primary)";
-  } else if (isTextHovering) {
-    scale = 1.8;
-    bg = "rgba(0, 255, 102, 0.05)";
-    border = "1px dashed var(--primary)";
-  }
+  }, [cursorX, cursorY, isVisible]);
 
   return (
     <>
+      {/* Center Dot */}
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[10000] h-1.5 w-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]"
         style={{
@@ -117,6 +70,7 @@ const CustomCursor = () => {
         transition={{ duration: 0.15 }}
       />
       
+      {/* Outer Ring */}
       <motion.div
         className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full flex items-center justify-center overflow-hidden"
         style={{
@@ -127,12 +81,11 @@ const CustomCursor = () => {
           width: 36,
           height: 36,
           opacity: isVisible ? 1 : 0,
-          mixBlendMode: mixBlend,
         }}
         animate={{
-          scale: scale,
-          backgroundColor: bg,
-          border: border,
+          scale: isHovering ? 1.3 : isTextHovering ? 1.8 : 1,
+          backgroundColor: isHovering ? "rgba(0, 255, 102, 0.1)" : isTextHovering ? "rgba(0, 255, 102, 0.05)" : "rgba(0, 255, 102, 0)",
+          border: isHovering ? "1.5px solid var(--primary)" : isTextHovering ? "1px dashed var(--primary)" : "1px solid var(--primary)",
         }}
         transition={{ duration: 0.2, ease: "easeOut" }}
       />

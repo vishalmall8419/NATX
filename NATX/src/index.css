@@ -8,24 +8,26 @@
   --font-syne: "Syne", sans-serif;
 }
 
-:root, html.dark {
+:root,
+html.dark {
   --bg-primary: #000000;
   --bg-secondary: #0a0a0a;
   --bg-card: rgba(15, 15, 20, 0.6);
+  --bg-card2: rgba(15, 15, 20, 0.934);
   --bg-panel: rgba(20, 20, 25, 0.7);
-  
+
   --primary: #00ff66;
   --grad-cyan-start: #00ff66;
   --grad-cyan-end: #00993d;
-  
+
   --text-primary: #ffffff;
   --text-secondary: #e2e8f0;
   --text-gray-400: #94a3b8;
   --text-gray-500: #64748b;
-  
+
   --border-light: rgba(255, 255, 255, 0.1);
   --border: rgba(255, 255, 255, 0.15);
-  
+
   --button-text: #000000;
 }
 
@@ -34,19 +36,19 @@ html.light {
   --bg-secondary: #ffffff;
   --bg-card: rgba(255, 255, 255, 0.8);
   --bg-panel: rgba(248, 250, 252, 0.9);
-  
+
   --primary: #00cc52;
   --grad-cyan-start: #00cc52;
   --grad-cyan-end: #006629;
-  
+
   --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-gray-400: #475569;
   --text-gray-500: #64748b;
-  
+
   --border-light: rgba(0, 0, 0, 0.1);
   --border: rgba(0, 0, 0, 0.15);
-  
+
   --button-text: #ffffff;
 }
 
@@ -63,9 +65,20 @@ body {
 /* ==========================================================================
    SCROLLBAR (Optimized)
    ========================================================================== */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--grad-cyan-start), var(--grad-cyan-end)); border-radius: 10px; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--grad-cyan-start),
+    var(--grad-cyan-end)
+  );
+  border-radius: 10px;
+}
 
 /* ==========================================================================
    LAYOUT UTILITIES
@@ -78,24 +91,56 @@ body {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
-@media (min-width: 640px) { .section-container { padding-left: 1.5rem; padding-right: 1.5rem; } }
-@media (min-width: 1024px) { .section-container { padding-left: 2.5rem; padding-right: 2.5rem; } }
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
 
-.section-padding { padding-top: 3.5rem; padding-bottom: 3.5rem; }
-@media (min-width: 768px) { .section-padding { padding-top: 5rem; padding-bottom: 5rem; } }
-@media (min-width: 1024px) { .section-padding { padding-top: 6rem; padding-bottom: 6rem; } }
+.section-padding {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
 
 .section-divider {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-light),
+    transparent
+  );
 }
 
 /* ==========================================================================
    GRADIENT & GLOW UTILITIES
    ========================================================================== */
 .text-gradient {
-  background: linear-gradient(135deg, var(--grad-cyan-start), var(--grad-cyan-end));
+  background: linear-gradient(
+    135deg,
+    var(--grad-cyan-start),
+    var(--grad-cyan-end)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -112,9 +157,18 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%   { transform: scale(1) translate(0, 0); opacity: 0.12; }
-  50%  { transform: scale(1.15) translate(40px, -40px); opacity: 0.2; }
-  100% { transform: scale(0.92) translate(-40px, 15px); opacity: 0.08; }
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.12;
+  }
+  50% {
+    transform: scale(1.15) translate(40px, -40px);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.92) translate(-40px, 15px);
+    opacity: 0.08;
+  }
 }
 
 /* ==========================================================================
@@ -158,9 +212,9 @@ html.light .badge-pill {
    ========================================================================== */
 .text-3d {
   text-shadow:
-    0 1px 0px rgba(255,255,255,0.1),
-    0 3px 10px rgba(0,229,255,0.2),
-    0 6px 15px rgba(0,0,0,0.5);
+    0 1px 0px rgba(255, 255, 255, 0.1),
+    0 3px 10px rgba(0, 229, 255, 0.2),
+    0 6px 15px rgba(0, 0, 0, 0.5);
 }
 .heading-xl {
   font-family: var(--font-syne);
@@ -180,11 +234,21 @@ html.light .badge-pill {
    ANIMATIONS
    ========================================================================== */
 @keyframes meteor {
-  0%   { transform: rotate(215deg) translateX(0); opacity: 1; }
-  70%  { opacity: 1; }
-  100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
 }
-.animate-meteor { animation: meteor 5s linear infinite; }
+.animate-meteor {
+  animation: meteor 5s linear infinite;
+}
 
 /* ==========================================================================
    PHYSICS TILT GLARE (Optimized layers)
@@ -197,13 +261,13 @@ html.light .badge-pill {
   will-change: transform;
 }
 .physics-tilt::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   background: radial-gradient(
     600px circle at var(--glare-x, 50%) var(--glare-y, 50%),
-    rgba(255,255,255,0.05),
+    rgba(255, 255, 255, 0.05),
     transparent 45%
   );
   z-index: 1;
@@ -211,23 +275,42 @@ html.light .badge-pill {
   opacity: 0;
   transition: opacity 0.4s ease;
 }
-.physics-tilt:hover::before { opacity: 1; }
-.physics-tilt > * { position: relative; z-index: 2; }
+.physics-tilt:hover::before {
+  opacity: 1;
+}
+.physics-tilt > * {
+  position: relative;
+  z-index: 2;
+}
 
 /* ==========================================================================
    CURSOR SELECTION & FIXES
    ========================================================================== */
-::selection { background: rgba(0, 255, 102, 0.3); color: #fff; }
-.interactable { cursor: none; }
-a, button, input { cursor: pointer; }
-img { max-width: 100%; height: auto; }
+::selection {
+  background: rgba(0, 255, 102, 0.3);
+  color: #fff;
+}
+.interactable {
+  cursor: none;
+}
+a,
+button,
+input {
+  cursor: pointer;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
 /* removed scroll-behavior: smooth to fix Lenis jitter */
 
 /* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

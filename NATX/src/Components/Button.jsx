@@ -1,10 +1,13 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Button = ({ path, text, icon, className, onClick }) => {
   return (
     <Link
       to={path}
-      className={"group relative flex w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--grad-cyan-start)] to-[var(--grad-cyan-end)] px-7 py-3 font-space text-[14px] font-bold uppercase tracking-wider text-[var(--button-text)] transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] " + (className || "")}
+      className={
+        "group relative flex w-fit items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--grad-cyan-start)] to-[var(--grad-cyan-end)] px-7 py-3 font-space text-[14px] font-bold uppercase tracking-wider text-[var(--button-text)] transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(0,255,102,0.4)] " +
+        (className || "")
+      }
       onClick={onClick}
     >
       <span className="relative z-10 flex items-center gap-2">
@@ -19,4 +22,3 @@ const Button = ({ path, text, icon, className, onClick }) => {
 };
 
 export default Button;
-

@@ -3,7 +3,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Send, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Logo from "../Logo";
+
+// ... [skipping down to the mapping part]
+
+// Update the ecosystem mapping and privacy links
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,9 +64,11 @@ const Footer = () => {
           <div className="ftr-elem w-full lg:w-[25%] flex justify-start lg:justify-center">
             <div className="flex flex-col gap-4">
               <h4 className="font-space font-bold uppercase tracking-widest text-[var(--text-primary)] mb-2">Ecosystem</h4>
-              {["Developer Docs", "Block Explorer", "Governance Forum", "Node Setup Guide", "Whitepaper"].map(link => (
-                <a key={link} href="#" className="font-space text-[14px] text-[var(--text-gray-400)] transition-colors hover:text-[var(--primary)]">{link}</a>
-              ))}
+              <Link to="/docs" className="font-space text-[14px] text-[var(--text-gray-400)] transition-colors hover:text-[var(--primary)] interactable">Developer Docs</Link>
+              <Link to="/dashboard" className="font-space text-[14px] text-[var(--text-gray-400)] transition-colors hover:text-[var(--primary)] interactable">Block Explorer</Link>
+              <Link to="/dashboard/governance" className="font-space text-[14px] text-[var(--text-gray-400)] transition-colors hover:text-[var(--primary)] interactable">Governance Forum</Link>
+              <Link to="/node-guide" className="font-space text-[14px] text-[var(--text-gray-400)] transition-colors hover:text-[var(--primary)] interactable">Node Setup Guide</Link>
+              <Link to="/whitepaper" className="font-space text-[14px] text-[var(--text-gray-400)] transition-colors hover:text-[var(--primary)] interactable">Whitepaper</Link>
             </div>
           </div>
 
@@ -89,8 +96,8 @@ const Footer = () => {
         <div className="ftr-elem flex flex-col items-center justify-between gap-4 sm:flex-row text-[12px] font-space font-medium text-[var(--text-gray-500)]">
           <p>© 2024 NATX Protocol. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="transition-colors hover:text-[var(--primary)]">Privacy Policy</a>
-            <a href="#" className="transition-colors hover:text-[var(--primary)]">Terms of Service</a>
+            <Link to="/privacy" className="transition-colors hover:text-[var(--primary)] interactable">Privacy Policy</Link>
+            <Link to="/terms" className="transition-colors hover:text-[var(--primary)] interactable">Terms of Service</Link>
           </div>
         </div>
       </div>
